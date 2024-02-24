@@ -88,21 +88,28 @@ The prediction needs the knowledge of the state transition, expressed as equatio
 SoC(k) = SoC(k-1) - eta/Qn * I(k-1)          ······(6)
 UL(k) = UOC(k-1) - I(k-1) * Ro - Up(k-1)     ······(7)
 UOC(k) = f(SoC(k-1))                         ······(8)
+
 Here eta and Qn denote the coulombic efficiency and the rated capacity of the battery respectively. Let X be the state vector [SoC, Up]', A be the state transformation matrix [1, 0; 0, exp(-Δt/tao)] and B be the input control matrix [-eta/Qn, 0; 0, Rp*(1-exp(-Δt/tao))]. Then equation (5) and (6) can be expressed as follows.
 
 X(k) = A * X(k-1) + B * I(k-1)               ······(9)
+
 The Kalman filter makes use of the process noise and observation noise for the state estimation. Then there's an important step of predicting the covariance of process error, expressed as P.
 
 P(k) = A(k-1) * P(k-1) * A'(k-1) + Q        ······(10)
+
 Here Q is a diagonal matrix containing the variances of the process noises. For the state X=[SoC, Up]', Q is a 2x2 diagonal matrix [Qs, 0; 0, Qu], in which Qs is the variances of process noises for SoC and Qu is that for Up.
 
 Note that UOC is a nonlinear function of SoC, which makes the UL=g(X, I) is nonlinear. The linearization step is Taylor expanding g(X, I) around X(k) with first order approximation.
 
 UL = g(X(k), I(k)) + əg/əX(k) * (X - X(k))  ······(11)
+
 C(k) = əg/əX(k)
      = [əg/əSoC(k) əg/əUp(k)]
      = [ə(UoC-Ro*I(k))/əSoC(k) -1]          ······(12)
-Hence UL = C(k) * X + (g(X(k), I(k)) - C(k)*X(k)). C(k) is a constant matrix and (g(X(k), I(k)) - C(k)*X(k)) is a constant too. The linearization is completed.
+     
+Hence UL = C(k) * X + (g(X(k), I(k)) - C(k)*X(k)).
+
+C(k) is a constant matrix and (g(X(k), I(k)) - C(k)*X(k)) is a constant too. The linearization is completed.
 
 Based on the result of linearization, the update step include updating the state vector and the covariance of process error by using the variance of observation noise R and observation value UL_ob.
 
@@ -110,8 +117,8 @@ K(k) = P(k) * C'(k) *
        (C(k) * P(k) * C'(k) + R)^(-1)       ······(13)
 X(k) = X(k) + K(k) * (UL_ob - UL(k))        ······(14)
 P(k) = P(k) - K(k) * C(k) * P(k)            ······(15)
-An Intuitive Derivation of the Kalman filter process is Here. An detailed explanation of UKF is Here.
 
+An Intuitive Derivation of the Kalman filter process is Here. An detailed explanation of UKF is Here.
 
 
 
