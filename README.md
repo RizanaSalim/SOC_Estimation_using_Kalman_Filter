@@ -53,7 +53,7 @@ The output results are captured in the below snapshots:
 
 ![image](https://github.com/RizanaSalim/SOC_Estimation_using_Kalman_Filter/assets/84447324/0bf24a35-45f6-4477-852b-fd1925ee5c79)
 
-# MATLAB Scripts
+# SoC estimation using EKF through MATLAB Scripts
 MATLAB scripts simulate discharge process of lithium-ion battery under the BBDST working condition and constant current working condition with observation noise, and uses EKF/UKF method to estimate SoC of the battery.
 
 function main(Work_modes, SoC_est_init)
