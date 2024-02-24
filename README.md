@@ -48,6 +48,29 @@ After improvement, the I/O relationship between modules becomes more perspicuous
 ![image](https://github.com/RizanaSalim/SOC_Estimation_using_Kalman_Filter/assets/84447324/f5bbc29c-42a9-4524-806f-0232e8d89e0b)
 
 The output results are captured in the below snapshots:
+
+![image](https://github.com/RizanaSalim/SOC_Estimation_using_Kalman_Filter/assets/84447324/4c6685ef-9e25-4f37-92e6-f87a79a4ee91)
+
+![image](https://github.com/RizanaSalim/SOC_Estimation_using_Kalman_Filter/assets/84447324/0bf24a35-45f6-4477-852b-fd1925ee5c79)
+
+# MATLAB Scripts
+MATLAB scripts simulate discharge process of lithium-ion battery under the BBDST working condition and constant current working condition with observation noise, and uses EKF/UKF method to estimate SoC of the battery.
+
+function main(Work_modes, SoC_est_init)
+
+The main function requires two arguments:
+
+Work_modes: Choice of working condition with 1 representing HPPT working condition and 2 representing constant current.
+
+SoC_est_init: The initial value of estimated SoC, it's set to 1 by default, if just one argument is passed.
+
+Type in command window like main()ormain(1)ormain(1,1), the result curves will appear as follows.
+
+The result is showcased below:
+
+![image](https://github.com/RizanaSalim/SOC_Estimation_using_Kalman_Filter/assets/84447324/17896e37-c288-4e9d-80df-8cf252dd2006)
+
+
 # Reference
 # 1. Thevenin equivalent circuit model
 
@@ -63,15 +86,20 @@ Thevenin equivalent circuit model(ECM) is a first-order RC circuit. The discharg
 The voltage on the polarization capacitor is denoted as Up. Then according to KVL and KCL we get the following equations.
 
 UL(t) = UOC - Up(t) - Ro * I(t)              ······(1)
+
 I(t) = Up(t) / Rp - Cp * (dUp(t)/dt)         ······(2)
+
 The solution of the differential equation (2) is as follows.
 
 Up(t) = C * exp(-t/tao) + I(t) * Rp          ······(3)
+
 tao = Rp * Cp                                ······(4)
+
 Here C is an arbitrary constant. The zero input response of the circuit model corresponds to the idle condition of the battery while zero state response corresponds to the working condition. The discretized form of Up in different states can be unified as follows.
 
 Up(k+1) = Up(k) * exp(-Δt/tao) + 
           Rp * I(k) * (1 - exp(-Δt/tao))     ······(5)
+          
 Here Δt denotes the sample interval. The parameters in the Thevenin ECM, including UOC, Ro, Rp and Cp, are deemed to be related to the SoC of the battery. The relationships are usually identified through the so call Hybrid Pulse Power Characterization(HPPC) test.
 
 # 2. Extended Kalman Filter
