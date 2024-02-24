@@ -9,7 +9,7 @@ It is defined as the ratio of the remaining charge in the battery, divided by th
 
 This project aims at implementing a Simulink model that estimates SOC of a Lithium-ion battery using Kalman Filter approach.
 
-# Model Details
+# Simulink Model Details
 
 The input parameters of the model include current and voltage that comes from battery data in HPPC(Hybrid PulsePower Characteristic) test.
 
@@ -53,7 +53,7 @@ The output results are captured in the below snapshots:
 
 ![image](https://github.com/RizanaSalim/SOC_Estimation_using_Kalman_Filter/assets/84447324/0bf24a35-45f6-4477-852b-fd1925ee5c79)
 
-# SoC estimation using EKF through MATLAB Scripts
+# SOC estimation using EKF through MATLAB Scripts
 MATLAB scripts simulate discharge process of lithium-ion battery under the BBDST working condition and constant current working condition with observation noise, and uses EKF/UKF method to estimate SoC of the battery.
 
 function main(Work_modes, SoC_est_init)
