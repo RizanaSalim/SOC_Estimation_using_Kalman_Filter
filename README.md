@@ -115,10 +115,16 @@ Based on the result of linearization, the update step include updating the state
 
 K(k) = P(k) * C'(k) * 
        (C(k) * P(k) * C'(k) + R)^(-1)       ······(13)
+       
 X(k) = X(k) + K(k) * (UL_ob - UL(k))        ······(14)
+
 P(k) = P(k) - K(k) * C(k) * P(k)            ······(15)
 
-An Intuitive Derivation of the Kalman filter process is Here. An detailed explanation of UKF is Here.
+An Intuitive Derivation of the Kalman filter process is given in this source:
+https://courses.engr.illinois.edu/ece420/sp2017/UnderstandingKalmanFilter.pdf.
+
+Detailed explanation of UKF is available below:
+https://www.cs.ubc.ca/~murphyk/Papers/Julier_Uhlmann_mar04.pdf
 
 
 
