@@ -54,6 +54,7 @@ The output results are captured in the below snapshots:
 Thevenin’s theorem
 
 "Thevenin’s theorem states that any linear network having a number of voltage sources and resistances can be replaced by a simple equivalent circuit consisting of a single voltage source (VTH)  in series with a resistance (RTH), where VTH is the open-circuit voltage at the terminals of the load and RTH is the equivalent resistance measured across the terminals while independent sources are turned off."
+
 Thevenin equivalent circuit model(ECM) is a first-order RC circuit. The discharge direction is taken as the positive direction of current, as shown in the figure below:
 
 ![image](https://github.com/RizanaSalim/SOC_Estimation_using_Kalman_Filter/assets/84447324/527e4589-05b6-44e5-b739-0fef8a515064)
@@ -77,16 +78,20 @@ Here Δt denotes the sample interval. The parameters in the Thevenin ECM, includ
 
 The basis of Kalman filter is the process of fusing the information from the prediction and the observation, under the hypothesis that the process error and the observation error are both stochastic noises, obeying Gaussian distributions. The EKF mainly consist of three steps: prediction, linearization and update.
 
+
 _______________________________________________________
 |                                                     |
 |    |----------|     |-------------|     |------|    |
 ---->|prediction|---->|linearization|---->|update|-----
      |----------|     |-------------|     |------|
+
      
 The prediction needs the knowledge of the state transition, expressed as equation (5) and (6), and observation estimate, expressed as equation (7) and (8).
 
 SoC(k) = SoC(k-1) - eta/Qn * I(k-1)          ······(6)
+
 UL(k) = UOC(k-1) - I(k-1) * Ro - Up(k-1)     ······(7)
+
 UOC(k) = f(SoC(k-1))                         ······(8)
 
 Here eta and Qn denote the coulombic efficiency and the rated capacity of the battery respectively. Let X be the state vector [SoC, Up]', A be the state transformation matrix [1, 0; 0, exp(-Δt/tao)] and B be the input control matrix [-eta/Qn, 0; 0, Rp*(1-exp(-Δt/tao))]. Then equation (5) and (6) can be expressed as follows.
@@ -120,10 +125,13 @@ X(k) = X(k) + K(k) * (UL_ob - UL(k))        ······(14)
 
 P(k) = P(k) - K(k) * C(k) * P(k)            ······(15)
 
+
 An Intuitive Derivation of the Kalman filter process is given in this source:
+
 https://courses.engr.illinois.edu/ece420/sp2017/UnderstandingKalmanFilter.pdf.
 
 Detailed explanation of UKF is available below:
+
 https://www.cs.ubc.ca/~murphyk/Papers/Julier_Uhlmann_mar04.pdf
 
 
